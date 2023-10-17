@@ -11,7 +11,7 @@ const server = http.createServer((req,res) => {
   // 1. 요청 url
   // 2. 요청 메서드
 if(req.url === '/' && req.method === 'GET'){
-  fs.readFile('./static.index.html', 'utf8', (err,data) => {
+  fs.readFile('./static/index.html', 'utf8', (err,data) => {
     if(err) {
     serverErrorLog();
     }
@@ -19,7 +19,7 @@ if(req.url === '/' && req.method === 'GET'){
     res.end(data);
   });
 }else if(req.url === '/css/style.css' && req.method === 'GET') {
-  fs.readFile('./static/css/style.css','utf8',(ree,data) => {
+  fs.readFile('./css/style.css','utf8',(err,data) => {
     if(err) {
       serverErrorLog();
     }
@@ -27,7 +27,7 @@ if(req.url === '/' && req.method === 'GET'){
     res.end(data);
   });
 }else if(req.url === './js/index.js' && req.method === "GET") {
-  fs.readFile('./static/js/index.js','utf8', (err,data) => {
+  fs.readFile('./js/index.js','utf8', (err,data) => {
     if(err) {
       serverErrorLog();
     }
@@ -38,4 +38,9 @@ if(req.url === '/' && req.method === 'GET'){
   res.writeHead(404);
   res.end('not Found');
   }
+});
+
+const PORT = 8080;
+server.listen(PORT, () => {
+  console.log(`cli창에서 컨트롤 누른 후 옆에 포트 누르면 편리하게 확인 -> http://localhost${PORT}/`);
 });
